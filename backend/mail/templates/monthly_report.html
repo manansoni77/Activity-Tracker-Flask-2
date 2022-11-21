@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="'en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ username }}'s Monthly Report</title>
+</head>
+
+<body>
+    {% for tracker in tracker_data %}
+    <div id="tracker-container">
+        <div id="title">
+            <p id="title">{{ tracker.track_name }}</p>
+        </div>
+        <p id="text">{{ tracker.track_desc }}</p>
+        <div id="body">
+            <div id="img-table">
+                {% if tracker.logs|length == 0 %}
+                <p>No Activity Logged Yet</p>
+                <br>
+                {% else %}
+                <table id="logs-list">
+                    <tr>
+                        <th>
+                            Value
+                        </th>
+                        <th>
+                            Time
+                        </th>
+                    </tr>
+                    {% for log in tracker.logs %}
+                    <tr>
+                        <td>
+                            {{ log.info }}
+                        </td>
+                        <td>
+                            {{ log.time }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                {% endif %}
+                <div>
+                    {% if tracker.plot %}
+                    <img src="data:image/jpeg;base64,{{ tracker.plot }}">
+                    {% else %}
+                    <p> No Plot Available </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</body>
+
+</html>
