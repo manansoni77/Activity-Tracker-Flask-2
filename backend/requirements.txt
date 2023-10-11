@@ -10,4 +10,4 @@ PyJWT
 SQLAlchemy
 Werkzeug
 gunicorn
-celery
+celery==5.2.7
