@@ -1,0 +1,12 @@
+Flask
+Flask_Caching
+Flask_Cors
+Flask_Login
+Flask_RESTful
+flask_sqlalchemy
+matplotlib
+pandas
+PyJWT
+SQLAlchemy
+Werkzeug
+gunicorn
