@@ -12,3 +12,4 @@ Werkzeug
 gunicorn
 celery==5.2.3
 importlib-metadata<5.0
+redis
