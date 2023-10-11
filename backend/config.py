@@ -1,8 +1,10 @@
 SECRET_KEY = 'this is a secret key'
 
+# CELERY_BROKER_URL = 'redis://localhost:6379/0'
+# CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_BROKER_URL = 'redis://red-ckjd28a12bvs739tgvg0:6379'
+CELERY_RESULT_BACKEND = 'redis://red-ckjd28a12bvs739tgvg0:6379'
 
 MAIL_SERVER = 'smtp.googlemail.com'
 MAIL_PORT = 587
