@@ -10,4 +10,5 @@ PyJWT
 SQLAlchemy
 Werkzeug
 gunicorn
-celery==5.2.3
+celery
+importlib-metadata<5.0
