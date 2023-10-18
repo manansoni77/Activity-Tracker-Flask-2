@@ -1,0 +1,5 @@
+**/__pycache__/**
+**/.env
+**/set_env.sh
+**/*.json
+**/node_modules/**
