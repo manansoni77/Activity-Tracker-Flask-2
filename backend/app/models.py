@@ -5,8 +5,6 @@ from functools import wraps
 import jwt
 
 db = SQLAlchemy()
-DB_NAME = 'database.sqlite3'
-
 
 class Credentials(db.Model):
     __tablename__ = 'credentials'
