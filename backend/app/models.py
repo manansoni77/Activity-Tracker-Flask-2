@@ -1,4 +1,4 @@
-from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy, inspect
 from flask_login import UserMixin
 from flask import request, current_app as app, make_response, jsonify
 from functools import wraps

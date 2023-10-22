@@ -1,13 +1,13 @@
-from flask_restful import fields, marshal
-from flask import request, current_app as app, make_response, jsonify, send_file
+from flask_restful import marshal
+from flask import request, current_app as app, make_response, jsonify
 from app.cache import cache
 from datetime import datetime, timedelta
 from app.models import Credentials, User, Trackers, Logs, db, token_required
-from app.tasks import send_tracker_report, send_welcome_email, send_monthly_report
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy import desc
 from app.extra import *
 from app.resources import *
+from app import worker
 import jwt
 
 
@@ -23,7 +23,7 @@ def format_time_code(time):
 
 @app.route('/ping', methods=['GET'])
 def ping():
-    send_monthly_report.delay()
+    worker.send_task('sendMonthlyReport')
     return jsonify({'msg': 'Pong!'})
 
 
@@ -73,7 +73,7 @@ def signup():
             password, method='sha256'), last_login=datetime.utcnow(), user_id=new_user.user_id)
         db.session.add(new_cred)
         db.session.commit()
-        job = send_welcome_email.delay(f'{first_name} {last_name}', email_id)
+        job = worker.send_task('sendWelcomeMail', (f'{first_name} {last_name}', email_id))
         return make_response(jsonify({"message": "Signed up successfully"}), 201)
 
 @app.route("/dashboard", methods=["GET"])
@@ -240,5 +240,5 @@ def update_log(user_id):
 @token_required
 def getcsv(user_id, track_id):
     if request.method == 'GET':
-        send_tracker_report.delay(user_id, track_id)
+        worker.send_task('sendTrackerReport', (user_id, track_id))
     return '', 201
